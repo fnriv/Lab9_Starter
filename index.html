@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "f52f0bbb0f764dedabde24a07fa4507f"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -101,7 +109,112 @@
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
-    // You may move this JS to another file if you wish
+    
+    // log
+    errorBtns[0].addEventListener('click', function() {
+      console.log("Console log.");
+    });
+
+    // error
+    errorBtns[1].addEventListener('click', function() {
+      console.error("Console error!");
+    });
+
+    // count
+    errorBtns[2].addEventListener('click', function() {
+      console.count("Count: ");
+    });
+
+    // warn
+    errorBtns[3].addEventListener('click', function() {
+      console.warn("Console warning..");
+    });
+
+    // assert
+    errorBtns[4].addEventListener('click', function() {
+      console.assert(false, "Console assert message.");
+    });
+
+    // clear
+    errorBtns[5].addEventListener('click', function() {
+      console.clear();
+    });
+    
+    // dir
+    let dirObject = {
+      part1:"this is part 1, for console dir",
+      part2:"this is part 2",
+      part3:"this is part 3"
+    };
+    errorBtns[6].addEventListener('click', function() {
+      console.dir(dirObject);
+    });
+
+    // dirxml
+    errorBtns[7].addEventListener('click', function() {
+      console.dirxml(errorBtns[7]);
+    });
+
+    // group start
+    errorBtns[8].addEventListener('click', function() {
+      console.group();
+      console.log("in the group!");
+    });
+
+    // group end
+    errorBtns[9].addEventListener('click', function() {
+      console.groupEnd();
+      console.log("not in the group!");
+    });
+
+    // table
+    errorBtns[10].addEventListener('click', function() {
+      console.table(["pineapple", "pen", "apple", "ppap!"]);
+    });
+
+    // start timer 
+    errorBtns[11].addEventListener('click', function() {
+      console.time("timer");
+    });
+
+    // end timer
+    errorBtns[12].addEventListener('click', function() {
+      console.timeEnd("timer");
+    });
+
+    // console trace
+    errorBtns[13].addEventListener('click', function() {
+      console.trace();
+    });
+
+    // trigger global error
+    //  error class 
+    class LabError extends Error {
+      constructor(msg){
+        super(msg);
+        this.name = "LabError";
+      }
+    }
+
+    errorBtns[14].addEventListener('click', function() {
+      throw new LabError("this is a lab error. wah.");
+    });
+
+
+    // try catch
+    try {
+      const button = errorBtns[2];
+      button = "cool";
+    } catch (error) {
+      console.error("Why you trying to change a const?");
+    } finally {
+      console.log("Anyways, keep going");
+    }
+
+    // trackjs
+    window.addEventListener('error', function(error) {
+      console.log(error);
+    });
   </script>
 </body>
 
